@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マレーシア就職・転職 自己診断</title>
+  <style>
+    /* --- カラー＆トーン設定（薄紫・ラベンダー基調） --- */
+    :root {
+      --primary: #4C1D95;       /* ディープパープル（文字・強調） */
+      --primary-light: #7C3AED; /* 明るいパープル（アクセント） */
+      --accent: #A78BFA;        /* ソフトパープル */
+      --bg-gradient: linear-gradient(135deg, #F3E8FF 0%, #ECE9FE 50%, #F5F3FF 100%);
+      --card-bg: #FFFFFF;
+      --text-main: #1E1B4B;
+      --text-sub: #6B21A8;
+      --text-muted: #64748B;
+      --border: #DDD6FE;
+      --result-bg: #2E1065;     /* 深みのある紫 */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px -5px rgba(124, 58, 237, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header-bar {
+      height: 10px;
+      background: linear-gradient(90deg, #A78BFA 0%, #7C3AED 50%, #C084FC 100%);
+    }
+
+    .card-body {
+      padding: 36px 28px;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #F3E8FF;
+      color: var(--primary-light);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .start-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .start-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .start-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(124, 58, 237, 0.35);
+    }
+
+    .progress-container {
+      margin-bottom: 28px;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      flex: 1;
+      height: 6px;
+      background-color: #F3E8FF;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: var(--primary-light);
+    }
+
+    .step-category {
+      font-size: 13px;
+      color: var(--primary-light);
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .question-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option-btn {
+      width: 100%;
+      padding: 18px 20px;
+      background: #FAF5FF;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary-light);
+      background-color: #F3E8FF;
+      transform: translateX(3px);
+    }
+
+    .option-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .option-main {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .option-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .loading-box {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #F3E8FF;
+      border-top: 4px solid var(--primary-light);
+      border-radius: 50%;
+      margin: 0 auto 20px auto;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .result-card {
+      background-color: var(--result-bg);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 16px;
+      box-shadow: 0 10px 30px rgba(46, 16, 101, 0.25);
+    }
+
+    .type-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .result-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 12px;
+      color: #F5F3FF;
+    }
+
+    /* 内定可能性ゲージ */
+    .probability-box {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
+
+    .prob-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .prob-label {
+      font-size: 13px;
+      color: #C4B5FD;
+      font-weight: 700;
+    }
+
+    .prob-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #FDE047; /* イエローアクセント */
+    }
+
+    .prob-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .prob-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #A78BFA 0%, #FDE047 100%);
+      border-radius: 5px;
+      transition: width 0.8s ease-out;
+    }
+
+    .section-block {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      color: #C4B5FD;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+      color: #EDE9FE;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      color: #A78BFA;
+      font-weight: bold;
+    }
+
+    .comment-box {
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #A78BFA;
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #F5F3FF;
+    }
+
+    .action-group {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-sub);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .btn-secondary:hover {
+      background: #F3E8FF;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header-bar"></div>
+  <div class="card-body">
+
+    <!-- 1. スタート画面 -->
+    <div id="start-screen" class="screen active">
+      <div style="text-align: center;">
+        <span class="hero-badge">🇲🇾 適性チェック</span>
+        <h1 class="start-title">マレーシア就職・転職<br>自己診断</h1>
+        <h2 class="start-subtitle">あなたはどのタイプ？</h2>
+        <p class="start-desc">4つの質問で、マレーシア転職への準備度・可能性をチェックできます。</p>
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">診断をはじめる (START)</button>
+    </div>
+
+    <!-- 2. 質問画面 (STEP 1〜4) -->
+    <div id="quiz-screen" class="screen">
+      <div class="progress-container">
+        <div class="progress-text">
+          <span id="step-indicator">STEP 1 / 4</span>
+          <span id="progress-percent">25%</span>
+        </div>
+        <div class="progress-dots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <div id="step-category" class="step-category">STEP 1：マレーシア転職への考え方</div>
+      <h2 id="question-text" class="question-title">質問文</h2>
+      <div id="options-container" class="options-grid"></div>
+    </div>
+
+    <!-- 3. ローディング画面 -->
+    <div id="loading-screen" class="screen">
+      <div class="loading-box">
+        <div class="spinner"></div>
+        <h3 style="color: var(--primary); font-size: 19px; margin-bottom: 8px; font-weight: 700;">診断中...</h3>
+        <p style="color: var(--text-muted); font-size: 13px;">あなたに最適な転職タイプを判定しています</p>
+      </div>
+    </div>
+
+    <!-- 4. 診断結果画面 -->
+    <div id="result-screen" class="screen">
+      <div style="text-align: center; margin-bottom: 8px;">
+        <span style="font-size: 13px; color: var(--text-sub); font-weight: 700;">診断結果</span>
+      </div>
+      <h2 style="text-align: center; font-size: 18px; color: var(--primary); margin-bottom: 16px; font-weight: 700;">あなたのマレーシア転職タイプ</h2>
+      
+      <div class="result-card">
+        <span id="result-badge" class="type-badge">TYPE A</span>
+        <h2 id="result-type-name" class="result-title">海外転職積極型</h2>
+
+        <!-- 内定現実性バー -->
+        <div class="probability-box">
+          <div class="prob-header">
+            <span class="prob-label">現地での内定現実性（マッチ度）</span>
+            <span id="prob-percent" class="prob-value">90%〜95%</span>
+          </div>
+          <div class="prob-bar-bg">
+            <div id="prob-bar-fill" class="prob-bar-fill" style="width: 90%;"></div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">✨ あなたの特徴</div>
+          <ul id="result-features" class="checklist"></ul>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title">💬 アドバイス・コメント</div>
+          <div id="result-comment" class="comment-box"></div>
+        </div>
+      </div>
+
+      <div class="action-group">
+        <button class="btn-primary" onclick="alert('面談予約・相談フォームへ遷移します（実装例）')">求人・キャリアについて無料相談する</button>
+        <button class="btn-secondary" onclick="resetQuiz()">もう一度診断する</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const questions = [
+    {
+      stepLabel: "STEP 1：マレーシア転職への考え方",
+      text: "Q1. あなたがマレーシア転職で一番重視することは？",
+      options: [
+        { main: "マレーシアで働くことを優先したい", sub: "海外で働くことを第一に考えている／条件を広げて幅広く求人を検討できる", val: "A" },
+        { main: "仕事内容・条件も重視したい", sub: "希望と市場のバランスを考えたい／条件次第では柔軟に検討できる", val: "B" },
+        { main: "希望条件を優先したい", sub: "職種、勤務時間、待遇などを重視したい／自分の希望に合う求人を探したい", val: "C" }
+      ]
+    },
+    {
+      stepLabel: "STEP 2：勤務時間について",
+      text: "Q2. 勤務時間について、どの程度対応できますか？",
+      options: [
+        { main: "柔軟に対応可能", sub: "シフト勤務、土日勤務、時間変動勤務にも対応可能", val: "A" },
+        { main: "条件によって相談可能", sub: "一部条件はあるが調整可能", val: "B" },
+        { main: "平日日中勤務を希望", sub: "固定勤務を希望／勤務条件を重視したい", val: "C" }
+      ]
+    },
+    {
+      stepLabel: "STEP 3：現在の英語力について",
+      text: "Q3. 現在の英語力はどのレベルですか？",
+      options: [
+        { main: "英語でのコミュニケーションに自信がある", sub: "目安：TOEIC 600点以上／英語環境でも対応可能・英語面接にも挑戦しやすい", val: "A" },
+        { main: "簡単な英会話・日常会話レベル", sub: "目安：TOEIC 400〜600点程度／基本的なコミュニケーションが可能・準備次第で英語面接に対応可能", val: "B" },
+        { main: "英語での会話に不安がある", sub: "目安：TOEIC 400点未満／英語使用頻度の低い環境から挑戦", val: "C" }
+      ]
+    },
+    {
+      stepLabel: "STEP 4：英語面接について",
+      text: "Q4. 英語面接への対応は可能ですか？",
+      options: [
+        { main: "問題なく対応可能", sub: "英語面接の求人も検討可能", val: "A" },
+        { main: "練習・準備すれば対応可能", sub: "事前対策で対応可能", val: "B" },
+        { main: "英語面接は避けたい", sub: "日本語面接中心で検討", val: "C" }
+      ]
+    }
+  ];
+
+  const resultData = {
+    TYPE_A: {
+      badge: "TYPE A",
+      name: "海外転職積極型",
+      probText: "90%〜95%",
+      probWidth: "92%",
+      features: [
+        "マレーシアで働くことを優先",
+        "条件面で柔軟性がある",
+        "英語対応にも前向き"
+      ],
+      comment: "マレーシア市場で最も需要が高いタイプです。日本人向け求人の多くは「シフト勤務」や「英語面接」が標準となりますが、ここをクリアできているため選考通過率は非常に高いです。条件を狭めずに応募数を確保できれば、短期間での内定獲得が十分に狙えます。"
+    },
+    TYPE_B: {
+      badge: "TYPE B",
+      name: "柔軟チャレンジ型",
+      probText: "70%〜80%",
+      probWidth: "75%",
+      features: [
+        "マレーシア転職への意欲が高い",
+        "一部条件を調整できる",
+        "準備次第で可能性を広げられる"
+      ],
+      comment: "現地での採用可能性が非常に高い期待のタイプです。マレーシアの求人はシフト制や英語面接が多いため、事前の英語面接対策（想定問答の準備）を行うことで合格率は一気に上がります。勤務時間の柔軟性を保ちつつ選考に臨むのが早期内定の鍵です。"
+    },
+    TYPE_C: {
+      badge: "TYPE C",
+      name: "バランス型",
+      probText: "50%〜60%",
+      probWidth: "55%",
+      features: [
+        "希望条件と転職可能性のバランスを重視",
+        "現実的に求人を検討できる"
+      ],
+      comment: "求人の「現実」と「自分の希望」のすり合わせが重要なタイプです。実際のところ、固定時間や土日休みの求人は競争率が高く件数も限られます。英語面接の対策を進めつつ、「許容できるシフトの範囲」を少し広げるだけでも、応募できる選択肢と内定率は大きく向上します。"
+    },
+    TYPE_D: {
+      badge: "TYPE D",
+      name: "条件重視型",
+      probText: "30%〜40%",
+      probWidth: "35%",
+      features: [
+        "希望条件が明確",
+        "働き方へのこだわりがある"
+      ],
+      comment: "「土日休み・固定時間・日本語のみ」といった条件に絞ると、マレーシアの日本人向け求人全体の1〜2割程度まで対象が狭まります。まずは譲れない条件の優先順位を整理し、市場に存在する希少な対象求人をピンポイントで狙っていく戦略が必要です。"
+    },
+    TYPE_E: {
+      badge: "TYPE E",
+      name: "準備強化型",
+      probText: "10%〜20%",
+      probWidth: "15%",
+      features: [
+        "マレーシア就職への興味がある",
+        "事前準備が重要"
+      ],
+      comment: "現時点ではターゲットとなる求人が極めて限られるため、まずは「準備期間」と割り切るのが近道です。マレーシア求人の大半で求められる基本的な英語面接の対策や、シフト勤務へのマインドセットを整えることで、将来的な内定可能性を飛躍的に高めることができます。"
+    }
+  };
+
+  let currentStep = 0;
+  let userAnswers = [];
+
+  function startQuiz() {
+    currentStep = 0;
+    userAnswers = [];
+    showScreen('quiz-screen');
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = questions[currentStep];
+    document.getElementById('step-indicator').innerText = `STEP ${currentStep + 1} / ${questions.length}`;
+    document.getElementById('progress-percent').innerText = `${((currentStep + 1) / questions.length) * 100}%`;
+    
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, idx) => {
+      if (idx <= currentStep) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+
+    document.getElementById('step-category').innerText = q.stepLabel;
+    document.getElementById('question-text').innerText = q.text;
+    
+    const container = document.getElementById('options-container');
+    container.innerHTML = '';
+
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `
+        <div class="option-content">
+          <div class="option-main">${opt.main}</div>
+          <div class="option-sub">${opt.sub}</div>
+        </div>
+        <span style="color:#7C3AED; font-weight:bold; font-size:16px;">➔</span>
+      `;
+      btn.onclick = () => selectOption(opt.val);
+      container.appendChild(btn);
+    });
+  }
+
+  function selectOption(val) {
+    userAnswers.push(val);
+    if (currentStep < questions.length - 1) {
+      currentStep++;
+      renderQuestion();
+    } else {
+      showLoadingAndCalculate();
+    }
+  }
+
+  function showLoadingAndCalculate() {
+    showScreen('loading-screen');
+    setTimeout(() => {
+      const typeKey = calculateResult(userAnswers);
+      renderResult(resultData[typeKey]);
+      showScreen('result-screen');
+    }, 1000);
+  }
+
+  function calculateResult(answers) {
+    const scoreMap = { 'A': 3, 'B': 2, 'C': 1 };
+    const totalScore = answers.reduce((sum, ans) => sum + (scoreMap[ans] || 1), 0);
+
+    if (totalScore >= 11) return 'TYPE_A';
+    if (totalScore >= 9)  return 'TYPE_B';
+    if (totalScore >= 7)  return 'TYPE_C';
+    if (totalScore >= 5)  return 'TYPE_D';
+    return 'TYPE_E';
+  }
+
+  function renderResult(data) {
+    document.getElementById('result-badge').innerText = data.badge;
+    document.getElementById('result-type-name').innerText = data.name;
+    document.getElementById('result-comment').innerText = data.comment;
+    document.getElementById('prob-percent').innerText = data.probText;
+    document.getElementById('prob-bar-fill').style.width = data.probWidth;
+
+    const featContainer = document.getElementById('result-features');
+    featContainer.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+  }
+
+  function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+  }
+
+  function resetQuiz() {
+    showScreen('start-screen');
+  }
+</script>
+
+</body>
+</html>
